@@ -1,0 +1,187 @@
+topic_id: 06_conditions
+tasks:
+- id: 06_conditions-01
+  topic_id: 06_conditions
+  index: 1
+  title: Знак числа
+  statement: '### Задача 1. Знак числа
+
+
+    Дано число `n`. Выведи `положительное`, `отрицательное` или `ноль`.'
+  reference: "\"\"\"Задача 1. Положительное / отрицательное / ноль.\"\"\"\nn = -7\nif n > 0:\n    print(\"положительное\")\nelif n < 0:\n    print(\"отрицательное\")\nelse:\n    print(\"ноль\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'отрицательное
+
+      '
+- id: 06_conditions-02
+  topic_id: 06_conditions
+  index: 2
+  title: Чётность
+  statement: '### Задача 2. Чётность
+
+
+    Выведи `чётное` или `нечётное` в зависимости от числа.'
+  reference: "\"\"\"Задача 2. Чётное или нечётное.\"\"\"\nn = 17\nif n % 2 == 0:\n    print(\"чётное\")\nelse:\n    print(\"нечётное\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'нечётное
+
+      '
+- id: 06_conditions-03
+  topic_id: 06_conditions
+  index: 3
+  title: Минимум из трёх
+  statement: '### Задача 3. Минимум из трёх
+
+
+    Найди минимум из трёх чисел `a, b, c`, **не используя** функцию `min`. Только `if/elif/else`.'
+  reference: "\"\"\"Задача 3. Минимум из трёх чисел.\"\"\"\na, b, c = 7, 3, 9\nif a <= b and a <= c:\n    minimum = a\nelif b <= a and b <= c:\n    minimum = b\nelse:\n    minimum = c\nprint(minimum)\n# (Можно проще: print(min(a, b, c)) — но смысл задачи в if/elif/else.)\n"
+  check:
+    kind: stdout
+    expected_stdout: '3
+
+      '
+- id: 06_conditions-04
+  topic_id: 06_conditions
+  index: 4
+  title: Високосный год
+  statement: '### Задача 4. Високосный год
+
+
+    Напиши функцию `is_leap(year)`. Год високосный, если делится на 4, **но не на 100** (исключение: делится на 400).
+
+    Проверь на годах: 2020, 2021, 1900, 2000, 2024.'
+  reference: "\"\"\"Задача 4. Високосный ли год.\nВисокосный: делится на 4, но НЕ на 100, ИЛИ делится на 400.\"\"\"\ndef is_leap(year: int) -> bool:\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)\n\nfor y in [2020, 2021, 1900, 2000, 2024]:\n    print(y, is_leap(y))\n"
+  check:
+    kind: stdout
+    expected_stdout: '2020 True
+
+      2021 False
+
+      1900 False
+
+      2000 True
+
+      2024 True
+
+      '
+- id: 06_conditions-05
+  topic_id: 06_conditions
+  index: 5
+  title: Существует ли треугольник?
+  statement: '### Задача 5. Существует ли треугольник?
+
+
+    Дано три стороны. Треугольник существует, если каждая сторона **меньше** суммы двух других. Выведи «существует» или «не существует».'
+  reference: "\"\"\"Задача 5. Треугольник существует, если каждая сторона\nменьше суммы двух других.\"\"\"\na, b, c = 3, 4, 5\nif a + b > c and a + c > b and b + c > a:\n    print(\"Треугольник существует\")\nelse:\n    print(\"Не существует\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Треугольник существует
+
+      '
+- id: 06_conditions-06
+  topic_id: 06_conditions
+  index: 6
+  title: Гласная или согласная?
+  statement: '### Задача 6. Гласная или согласная?
+
+
+    Дан один русский символ. Определи: гласная это или согласная (без учёта регистра). *Подсказка:* список гласных можно записать как одну строку и использовать оператор `in`.'
+  reference: "\"\"\"Задача 6. Гласная буква?\"\"\"\nch = \"о\"\nif ch.lower() in \"аеёиоуыэюя\":\n    print(\"гласная\")\nelse:\n    print(\"согласная\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'гласная
+
+      '
+- id: 06_conditions-07
+  topic_id: 06_conditions
+  index: 7
+  title: Оценка по баллам
+  statement: '### Задача 7. Оценка по баллам
+
+
+    Балл 0..100. Преобразуй в букву:
+
+    - 90+ → A
+
+    - 80–89 → B
+
+    - 70–79 → C
+
+    - 60–69 → D
+
+    - < 60 → F'
+  reference: "\"\"\"Задача 7. Оценка по баллам (0..100):\n90+ → A, 80+ → B, 70+ → C, 60+ → D, иначе F.\"\"\"\nscore = 73\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 60:\n    grade = \"D\"\nelse:\n    grade = \"F\"\nprint(grade)\n"
+  check:
+    kind: stdout
+    expected_stdout: 'C
+
+      '
+- id: 06_conditions-08
+  topic_id: 06_conditions
+  index: 8
+  title: Категория BMI
+  statement: '### Задача 8. Категория BMI
+
+
+    Дан BMI. Выведи категорию:
+
+    - < 18.5 → недостаток
+
+    - 18.5–24.9 → норма
+
+    - 25–29.9 → избыток
+
+    - ≥ 30 → ожирение'
+  reference: "\"\"\"Задача 8. Категория BMI:\n<18.5 — недостаток веса\n18.5..24.9 — норма\n25..29.9 — избыток\n>=30 — ожирение\"\"\"\nbmi = 26.5\nif bmi < 18.5:\n    cat = \"недостаток\"\nelif bmi < 25:\n    cat = \"норма\"\nelif bmi < 30:\n    cat = \"избыток\"\nelse:\n    cat = \"ожирение\"\nprint(cat)\n"
+  check:
+    kind: stdout
+    expected_stdout: 'избыток
+
+      '
+- id: 06_conditions-09
+  topic_id: 06_conditions
+  index: 9
+  title: Корни квадратного уравнения
+  statement: '### Задача 9. Корни квадратного уравнения
+
+
+    Даны коэффициенты `a, b, c`. Найди корни уравнения `ax² + bx + c = 0`:
+
+    - Дискриминант D > 0 → два корня;
+
+    - D = 0 → один корень;
+
+    - D < 0 → действительных корней нет.'
+  reference: "\"\"\"Задача 9. Корни квадратного уравнения ax² + bx + c = 0.\"\"\"\nimport math\na, b, c = 1, -3, 2\nd = b * b - 4 * a * c\nif d > 0:\n    x1 = (-b + math.sqrt(d)) / (2 * a)\n    x2 = (-b - math.sqrt(d)) / (2 * a)\n    print(f\"Два корня: {x1}, {x2}\")\nelif d == 0:\n    x = -b / (2 * a)\n    print(f\"Один корень: {x}\")\nelse:\n    print(\"Действительных корней нет\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Два корня: 2.0, 1.0
+
+      '
+- id: 06_conditions-10
+  topic_id: 06_conditions
+  index: 10
+  title: Скидка
+  statement: '### Задача 10. Скидка
+
+
+    Дана сумма чека:
+
+    - < 1000 → 0%,
+
+    - 1000–4999 → 5%,
+
+    - 5000–9999 → 10%,
+
+    - ≥ 10000 → 15%.
+
+
+    Выведи сумму, процент скидки и сумму к оплате (с двумя знаками после точки).'
+  reference: "\"\"\"Задача 10. Скидка по сумме чека:\n< 1000 — 0%, < 5000 — 5%, < 10000 — 10%, иначе — 15%.\"\"\"\ntotal = 7800\nif total < 1000:\n    discount = 0\nelif total < 5000:\n    discount = 5\nelif total < 10000:\n    discount = 10\nelse:\n    discount = 15\nfinal = total * (1 - discount / 100)\nprint(f\"Сумма: {total}, скидка: {discount}%, к оплате: {final:.2f}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Сумма: 7800, скидка: 10%, к оплате: 7020.00
+
+      '

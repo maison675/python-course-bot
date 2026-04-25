@@ -1,0 +1,235 @@
+topic_id: 03_strings
+tasks:
+- id: 03_strings-01
+  topic_id: 03_strings
+  index: 1
+  title: Длина строки
+  statement: '### Задача 1. Длина строки
+
+
+    Дана строка `s = "Python — лучший!"`. Выведи количество символов в ней.'
+  reference: '"""Задача 1. Длина строки."""
+
+    s = "Python — лучший!"
+
+    print(len(s))
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '16
+
+      '
+- id: 03_strings-02
+  topic_id: 03_strings
+  index: 2
+  title: Первый и последний символ
+  statement: '### Задача 2. Первый и последний символ
+
+
+    Из строки `"программирование"` выведи первый и последний символы через пробел.'
+  reference: '"""Задача 2. Первый и последний символы."""
+
+    s = "программирование"
+
+    print(s[0], s[-1])
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'п е
+
+      '
+- id: 03_strings-03
+  topic_id: 03_strings
+  index: 3
+  title: Развернуть строку
+  statement: '### Задача 3. Развернуть строку
+
+
+    Из строки `"Hello"` получи `"olleH"` и выведи. *Подсказка:* срез с шагом `-1`.'
+  reference: '"""Задача 3. Развернуть строку."""
+
+    s = "Hello"
+
+    print(s[::-1])
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'olleH
+
+      '
+- id: 03_strings-04
+  topic_id: 03_strings
+  index: 4
+  title: Регистр
+  statement: '### Задача 4. Регистр
+
+
+    Дана строка `"Привет, Мир!"`. Выведи её в верхнем и в нижнем регистре (две отдельные строки).'
+  reference: '"""Задача 4. В верхний и нижний регистр."""
+
+    s = "Привет, Мир!"
+
+    print(s.upper())
+
+    print(s.lower())
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'ПРИВЕТ, МИР!
+
+      привет, мир!
+
+      '
+- id: 03_strings-05
+  topic_id: 03_strings
+  index: 5
+  title: Замена
+  statement: '### Задача 5. Замена
+
+
+    В строке `"Кот гонится за котом, а другой кот спит"` замени все вхождения `"кот"` на `"пёс"` и выведи. *Заметь, что замена чувствительна к регистру.*'
+  reference: '"""Задача 5. Заменить все ''кот'' на ''пёс''."""
+
+    s = "Кот гонится за котом, а другой кот спит"
+
+    result = s.replace("кот", "пёс")
+
+    print(result)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Кот гонится за пёсом, а другой пёс спит
+
+      '
+- id: 03_strings-06
+  topic_id: 03_strings
+  index: 6
+  title: Префикс и суффикс
+  statement: '### Задача 6. Префикс и суффикс
+
+
+    Дана `filename = "report.pdf"`. Проверь и выведи три значения:
+
+    - начинается ли имя с `"report"`,
+
+    - заканчивается ли на `".pdf"`,
+
+    - заканчивается ли на `".txt"`.'
+  reference: '"""Задача 6. Проверка префикса/суффикса."""
+
+    filename = "report.pdf"
+
+    print(filename.startswith("report"))
+
+    print(filename.endswith(".pdf"))
+
+    print(filename.endswith(".txt"))
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'True
+
+      True
+
+      False
+
+      '
+- id: 03_strings-07
+  topic_id: 03_strings
+  index: 7
+  title: Подсчёт символов
+  statement: '### Задача 7. Подсчёт символов
+
+
+    Сколько раз встречается буква `''о''` в строке `"молоко и какао"`? *Подсказка:* у строки есть метод `.count`.'
+  reference: '"""Задача 7. Сколько раз встречается буква ''о'' в строке?"""
+
+    s = "молоко и какао"
+
+    print(s.count("о"))
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '4
+
+      '
+- id: 03_strings-08
+  topic_id: 03_strings
+  index: 8
+  title: Разбить на слова
+  statement: '### Задача 8. Разбить на слова
+
+
+    Из строки `"Python — отличный язык программирования"` сделай список слов и выведи его и количество слов.'
+  reference: '"""Задача 8. Разбить предложение на слова."""
+
+    s = "Python — отличный язык программирования"
+
+    words = s.split()
+
+    print(words)
+
+    print(f"Слов: {len(words)}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '[''Python'', ''—'', ''отличный'', ''язык'', ''программирования'']
+
+      Слов: 5
+
+      '
+- id: 03_strings-09
+  topic_id: 03_strings
+  index: 9
+  title: Объединить в строку
+  statement: '### Задача 9. Объединить в строку
+
+
+    Дан список `["раз", "два", "три", "четыре"]`. Собери их в одну строку через разделитель `" - "`. *Подсказка:* `" - ".join(...)`.'
+  reference: '"""Задача 9. Объединить список слов в строку через '' - ''."""
+
+    words = ["раз", "два", "три", "четыре"]
+
+    result = " - ".join(words)
+
+    print(result)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'раз - два - три - четыре
+
+      '
+- id: 03_strings-10
+  topic_id: 03_strings
+  index: 10
+  title: Палиндром
+  statement: '### Задача 10. Палиндром
+
+
+    Напиши функцию `is_palindrome(s)`, которая возвращает `True`, если строка читается одинаково в обе стороны (без учёта регистра и пробелов). Проверь на:
+
+
+    - `"шалаш"` → True
+
+    - `"А роза упала на лапу Азора"` → True
+
+    - `"Python"` → False'
+  reference: "\"\"\"Задача 10. Палиндром?\nПроверить, читается ли строка одинаково в обе стороны.\nДолжно работать без учёта регистра и пробелов.\"\"\"\ndef is_palindrome(s: str) -> bool:\n    cleaned = s.lower().replace(\" \", \"\")\n    return cleaned == cleaned[::-1]\n\nprint(is_palindrome(\"шалаш\"))\nprint(is_palindrome(\"А роза упала на лапу Азора\"))\nprint(is_palindrome(\"Python\"))\n"
+  check:
+    kind: stdout
+    expected_stdout: 'True
+
+      True
+
+      False
+
+      '

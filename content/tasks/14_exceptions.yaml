@@ -1,0 +1,178 @@
+topic_id: 14_exceptions
+tasks:
+- id: 14_exceptions-01
+  topic_id: 14_exceptions
+  index: 1
+  title: Деление на ноль
+  statement: '### Задача 1. Деление на ноль
+
+
+    Напиши функцию `safe_div(a, b)`. Если `b == 0` — возвращает `None`, иначе — результат деления. **Используй `try/except ZeroDivisionError`** (не `if`).'
+  reference: "\"\"\"Задача 1. Поймать ZeroDivisionError.\"\"\"\ndef safe_div(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        return None\n\nprint(safe_div(10, 2))\nprint(safe_div(10, 0))\n"
+  check:
+    kind: stdout
+    expected_stdout: '5.0
+
+      None
+
+      '
+- id: 14_exceptions-02
+  topic_id: 14_exceptions
+  index: 2
+  title: Не число
+  statement: '### Задача 2. Не число
+
+
+    Дан список строк `["42", "3.14", "abc", "  17  "]`. Для каждой попытайся преобразовать в `int`. Если получилось — вывести число, если нет — вывести «не число».'
+  reference: "\"\"\"Задача 2. Поймать ValueError при int().\"\"\"\ninputs = [\"42\", \"3.14\", \"abc\", \"  17  \"]\nfor s in inputs:\n    try:\n        n = int(s)\n        print(f\"'{s}' → {n}\")\n    except ValueError:\n        print(f\"'{s}' → не число\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '''42'' → 42
+
+      ''3.14'' → не число
+
+      ''abc'' → не число
+
+      ''  17  '' → 17
+
+      '
+- id: 14_exceptions-03
+  topic_id: 14_exceptions
+  index: 3
+  title: Несколько ошибок
+  statement: '### Задача 3. Несколько ошибок
+
+
+    Напиши функцию `handle(s, b)`, которая возвращает `int(s) / b`. Поймай отдельно `ValueError` (если `s` не число) и `ZeroDivisionError`, верни понятное сообщение.'
+  reference: "\"\"\"Задача 3. Несколько except — каждое для своего типа исключения.\"\"\"\ndef handle(s, b):\n    try:\n        n = int(s)\n        return n / b\n    except ValueError:\n        return \"Не число\"\n    except ZeroDivisionError:\n        return \"Деление на ноль\"\n\nprint(handle(\"10\", 2))\nprint(handle(\"abc\", 2))\nprint(handle(\"10\", 0))\n"
+  check:
+    kind: stdout
+    expected_stdout: '5.0
+
+      Не число
+
+      Деление на ноль
+
+      '
+- id: 14_exceptions-04
+  topic_id: 14_exceptions
+  index: 4
+  title: else и finally
+  statement: '### Задача 4. else и finally
+
+
+    Напиши функцию, которая делит `a / b`. `else` — выполняется только если деление прошло без ошибок. `finally` — выполняется всегда (даже при ошибке). Проверь на `(10, 2)` и `(10, 0)`.'
+  reference: "\"\"\"Задача 4. else выполняется, если try НЕ упал. finally — всегда.\"\"\"\ndef test(a, b):\n    try:\n        result = a / b\n    except ZeroDivisionError:\n        print(\"Ошибка: деление на ноль\")\n    else:\n        print(f\"OK: {result}\")\n    finally:\n        print(\"Эта строка выполнится в любом случае\")\n\nprint(\"--- 10 / 2 ---\")\ntest(10, 2)\nprint(\"--- 10 / 0 ---\")\ntest(10, 0)\n"
+  check:
+    kind: stdout
+    expected_stdout: '--- 10 / 2 ---
+
+      OK: 5.0
+
+      Эта строка выполнится в любом случае
+
+      --- 10 / 0 ---
+
+      Ошибка: деление на ноль
+
+      Эта строка выполнится в любом случае
+
+      '
+- id: 14_exceptions-05
+  topic_id: 14_exceptions
+  index: 5
+  title: Свой `raise`
+  statement: '### Задача 5. Свой `raise`
+
+
+    Напиши `withdraw(balance, amount)`. Если `amount <= 0` или `amount > balance` — вызови `raise ValueError("...")` с понятным сообщением. Используй её в `try/except` и выведи поясняющий текст.'
+  reference: "\"\"\"Задача 5. Самостоятельно бросить ValueError, если данные некорректны.\"\"\"\ndef withdraw(balance, amount):\n    if amount <= 0:\n        raise ValueError(\"Сумма должна быть положительной\")\n    if amount > balance:\n        raise ValueError(\"Недостаточно средств\")\n    return balance - amount\n\ntry:\n    print(withdraw(1000, 300))\n    print(withdraw(1000, -50))\nexcept ValueError as e:\n    print(f\"Ошибка: {e}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '700
+
+      Ошибка: Сумма должна быть положительной
+
+      '
+- id: 14_exceptions-06
+  topic_id: 14_exceptions
+  index: 6
+  title: Своё исключение
+  statement: '### Задача 6. Своё исключение
+
+
+    Создай класс `InsufficientFundsError(Exception)`. Используй его в `withdraw` вместо обычного `ValueError`, чтобы обработка была более точечной.'
+  reference: "\"\"\"Задача 6. Своё исключение — наследник Exception.\"\"\"\nclass InsufficientFundsError(Exception):\n    \"\"\"Не хватает денег на счету\"\"\"\n\ndef withdraw(balance, amount):\n    if amount > balance:\n        raise InsufficientFundsError(f\"Не хватает {amount - balance}\")\n    return balance - amount\n\ntry:\n    print(withdraw(1000, 1500))\nexcept InsufficientFundsError as e:\n    print(f\"Денег не хватило: {e}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Денег не хватило: Не хватает 500
+
+      '
+- id: 14_exceptions-07
+  topic_id: 14_exceptions
+  index: 7
+  title: Прокинуть исключение дальше
+  statement: '### Задача 7. Прокинуть исключение дальше
+
+
+    Напиши `parse(s)`, которая делает `int(s)`. Поймай `ValueError`, выведи лог, потом **снова брось** через `raise` (без аргументов). На уровне вызывающей стороны поймай и обработай.'
+  reference: "\"\"\"Задача 7. Перехватить, залогировать и пробросить дальше.\"\"\"\ndef parse(s):\n    try:\n        return int(s)\n    except ValueError as e:\n        print(f\"Логируем ошибку: {e}\")\n        raise   # пробросить дальше для верхнего уровня\n\ntry:\n    parse(\"abc\")\nexcept ValueError:\n    print(\"Поймали наверху\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Логируем ошибку: invalid literal for int() with base 10: ''abc''
+
+      Поймали наверху
+
+      '
+- id: 14_exceptions-08
+  topic_id: 14_exceptions
+  index: 8
+  title: KeyError
+  statement: '### Задача 8. KeyError
+
+
+    Дан словарь `d = {"a": 1, "b": 2}`. Попробуй получить `d["c"]` — поймай `KeyError`. Покажи также безопасный способ через `.get()`.'
+  reference: "\"\"\"Задача 8. KeyError — несуществующий ключ словаря.\"\"\"\nd = {\"a\": 1, \"b\": 2}\n\ntry:\n    print(d[\"c\"])\nexcept KeyError:\n    print(\"Ключа нет\")\n\n# Безопасный способ:\nprint(d.get(\"c\", \"значение по умолчанию\"))\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Ключа нет
+
+      значение по умолчанию
+
+      '
+- id: 14_exceptions-09
+  topic_id: 14_exceptions
+  index: 9
+  title: Файл не найден
+  statement: '### Задача 9. Файл не найден
+
+
+    Попробуй открыть несуществующий файл. Поймай `FileNotFoundError` и выведи понятное сообщение.'
+  reference: "\"\"\"Задача 9. FileNotFoundError — файла нет.\"\"\"\ntry:\n    with open(\"nonexistent_file_xyz.txt\", \"r\") as f:\n        print(f.read())\nexcept FileNotFoundError:\n    print(\"Файл не найден\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Файл не найден
+
+      '
+- id: 14_exceptions-10
+  topic_id: 14_exceptions
+  index: 10
+  title: to_int с дефолтом
+  statement: '### Задача 10. to_int с дефолтом
+
+
+    Напиши универсальную `to_int(s, default=0)`, которая возвращает int от `s`, а при любой ошибке — `default`. Поймай **сразу `ValueError` и `TypeError`** одним `except`.'
+  reference: "\"\"\"Задача 10. Безопасное преобразование строки в число с дефолтом.\"\"\"\ndef to_int(s, default=0):\n    try:\n        return int(s)\n    except (ValueError, TypeError):\n        return default\n\nprint(to_int(\"42\"))\nprint(to_int(\"abc\"))\nprint(to_int(None))\nprint(to_int(\"99\", default=-1))\nprint(to_int(\"ой\", default=-1))\n"
+  check:
+    kind: stdout
+    expected_stdout: '42
+
+      0
+
+      0
+
+      99
+
+      -1
+
+      '

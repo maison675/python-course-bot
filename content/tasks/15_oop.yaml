@@ -1,0 +1,195 @@
+topic_id: 15_oop
+tasks:
+- id: 15_oop-01
+  topic_id: 15_oop
+  index: 1
+  title: Самый простой класс
+  statement: '### Задача 1. Самый простой класс
+
+
+    Создай класс `Dog` с одним методом `bark`, выводящим «Гав!». Создай экземпляр и вызови метод.'
+  reference: "\"\"\"Задача 1. Простой класс.\"\"\"\nclass Dog:\n    def bark(self):\n        print(\"Гав!\")\n\nrex = Dog()\nrex.bark()\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Гав!
+
+      '
+- id: 15_oop-02
+  topic_id: 15_oop
+  index: 2
+  title: Конструктор и атрибуты
+  statement: '### Задача 2. Конструктор и атрибуты
+
+
+    Добавь к `Dog` конструктор `__init__`, принимающий `name` и `age`. Метод `bark` должен использовать `self.name`. Создай двух собак и заставь их говорить.'
+  reference: "\"\"\"Задача 2. Конструктор с атрибутами.\"\"\"\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def bark(self):\n        print(f\"{self.name} говорит: Гав!\")\n\nrex = Dog(\"Рекс\", 3)\nbuddy = Dog(\"Бадди\", 5)\nrex.bark()\nbuddy.bark()\nprint(f\"{rex.name} — {rex.age} лет\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Рекс говорит: Гав!
+
+      Бадди говорит: Гав!
+
+      Рекс — 3 лет
+
+      '
+- id: 15_oop-03
+  topic_id: 15_oop
+  index: 3
+  title: __str__ и __repr__
+  statement: '### Задача 3. __str__ и __repr__
+
+
+    Создай класс `Point(x, y)`. Реализуй:
+
+    - `__str__` — для красивого отображения `(3; 4)`,
+
+    - `__repr__` — для отладочного `Point(3, 4)`.
+
+
+    Покажи разницу: `print(p)` использует `__str__`, а внутри списков выводится `__repr__`.'
+  reference: "\"\"\"Задача 3. __str__ и __repr__.\"\"\"\nclass Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n    def __str__(self):\n        return f\"({self.x}; {self.y})\"\n\n    def __repr__(self):\n        return f\"Point({self.x}, {self.y})\"\n\np = Point(3, 4)\nprint(p)            # вызовет __str__\nprint(repr(p))      # вызовет __repr__\nprint([p, p])       # в коллекциях используется __repr__\n"
+  check:
+    kind: stdout
+    expected_stdout: '(3; 4)
+
+      Point(3, 4)
+
+      [Point(3, 4), Point(3, 4)]
+
+      '
+- id: 15_oop-04
+  topic_id: 15_oop
+  index: 4
+  title: Наследование
+  statement: '### Задача 4. Наследование
+
+
+    Создай базовый класс `Animal(name)` с методом `speak`. Создай `Dog` и `Cat`, наследующие от `Animal`, и **переопредели** `speak`. Положи трёх в один список и вызови `speak` для каждого.'
+  reference: "\"\"\"Задача 4. Наследование.\"\"\"\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        print(f\"{self.name} издаёт звук\")\n\nclass Dog(Animal):\n    def speak(self):\n        print(f\"{self.name}: Гав!\")\n\nclass Cat(Animal):\n    def speak(self):\n        print(f\"{self.name}: Мяу!\")\n\nfor a in [Dog(\"Рекс\"), Cat(\"Барсик\"), Animal(\"Существо\")]:\n    a.speak()\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Рекс: Гав!
+
+      Барсик: Мяу!
+
+      Существо издаёт звук
+
+      '
+- id: 15_oop-05
+  topic_id: 15_oop
+  index: 5
+  title: super()
+  statement: '### Задача 5. super()
+
+
+    Создай `Animal(name)` и `Dog(name, breed)`. В конструкторе `Dog` вызови конструктор родителя через `super().__init__(name)` и добавь свой атрибут `breed`.'
+  reference: "\"\"\"Задача 5. super() — вызов конструктора родителя.\"\"\"\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog(Animal):\n    def __init__(self, name, breed):\n        super().__init__(name)\n        self.breed = breed\n\nrex = Dog(\"Рекс\", \"лабрадор\")\nprint(rex.name, rex.breed)\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Рекс лабрадор
+
+      '
+- id: 15_oop-06
+  topic_id: 15_oop
+  index: 6
+  title: '@property'
+  statement: '### Задача 6. @property
+
+
+    Создай `Person(first, last)`. Сделай `full_name` через `@property`, чтобы можно было обращаться без скобок: `p.full_name`.'
+  reference: "\"\"\"Задача 6. @property — методы, ведущие себя как атрибуты.\"\"\"\nclass Person:\n    def __init__(self, first, last):\n        self.first = first\n        self.last = last\n\n    @property\n    def full_name(self):\n        return f\"{self.first} {self.last}\"\n\np = Person(\"Иван\", \"Петров\")\nprint(p.full_name)    # без скобок!\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Иван Петров
+
+      '
+- id: 15_oop-07
+  topic_id: 15_oop
+  index: 7
+  title: '@classmethod'
+  statement: '### Задача 7. @classmethod
+
+
+    Создай `Date(day, month, year)`. Добавь альтернативный конструктор `Date.from_string("15.01.2025")`. Используй `@classmethod`. Реализуй `__str__` для красивого вывода с ведущими нулями.'
+  reference: "\"\"\"Задача 7. @classmethod — альтернативный конструктор.\"\"\"\nclass Date:\n    def __init__(self, day, month, year):\n        self.day, self.month, self.year = day, month, year\n\n    @classmethod\n    def from_string(cls, s):\n        d, m, y = map(int, s.split(\".\"))\n        return cls(d, m, y)\n\n    def __str__(self):\n        return f\"{self.day:02d}.{self.month:02d}.{self.year}\"\n\nd1 = Date(1, 5, 2024)\nd2 = Date.from_string(\"15.01.2025\")\nprint(d1)\nprint(d2)\n"
+  check:
+    kind: stdout
+    expected_stdout: '01.05.2024
+
+      15.01.2025
+
+      '
+- id: 15_oop-08
+  topic_id: 15_oop
+  index: 8
+  title: '@staticmethod'
+  statement: '### Задача 8. @staticmethod
+
+
+    Создай `MathUtils` с двумя статическими методами: `is_even(n)` и `gcd(a, b)`. Они не используют `self` — это просто утилитные функции, логически связанные с классом.'
+  reference: "\"\"\"Задача 8. @staticmethod — функция, привязанная к классу логически.\"\"\"\nclass MathUtils:\n    @staticmethod\n    def is_even(n):\n        return n % 2 == 0\n\n    @staticmethod\n    def gcd(a, b):\n        while b:\n            a, b = b, a % b\n        return a\n\nprint(MathUtils.is_even(10))\nprint(MathUtils.gcd(48, 18))\n"
+  check:
+    kind: stdout
+    expected_stdout: 'True
+
+      6
+
+      '
+- id: 15_oop-09
+  topic_id: 15_oop
+  index: 9
+  title: Перегрузка операторов
+  statement: '### Задача 9. Перегрузка операторов
+
+
+    Создай `Vector(x, y)`. Реализуй:
+
+    - `__add__` — сложение двух векторов;
+
+    - `__eq__` — равенство;
+
+    - `__repr__` — `Vector(x, y)`.
+
+
+    Проверь: `Vector(1,2) + Vector(3,4)` должно дать `Vector(4, 6)`.'
+  reference: "\"\"\"Задача 9. Vector с __eq__ и __add__.\"\"\"\nclass Vector:\n    def __init__(self, x, y):\n        self.x, self.y = x, y\n\n    def __add__(self, other):\n        return Vector(self.x + other.x, self.y + other.y)\n\n    def __eq__(self, other):\n        return self.x == other.x and self.y == other.y\n\n    def __repr__(self):\n        return f\"Vector({self.x}, {self.y})\"\n\na = Vector(1, 2)\nb = Vector(3, 4)\nprint(a + b)\nprint(a == Vector(1, 2))\nprint(a == b)\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Vector(4, 6)
+
+      True
+
+      False
+
+      '
+- id: 15_oop-10
+  topic_id: 15_oop
+  index: 10
+  title: Банковский счёт
+  statement: '### Задача 10. Банковский счёт
+
+
+    Класс `Account(owner, balance=0)`. Реализуй:
+
+    - `deposit(amount)` — добавить, бросать `ValueError` при `amount <= 0`;
+
+    - `withdraw(amount)` — снять, бросать `ValueError` при недостатке средств;
+
+    - `history` — список строк, например `"+500"`, `"-300"`;
+
+    - `balance` через `@property` (внешне атрибут);
+
+    - `__repr__`.
+
+
+    Создай счёт, сделай несколько операций и выведи историю.'
+  reference: "\"\"\"Задача 10. Банковский счёт с историей операций.\"\"\"\nclass Account:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self._balance = balance\n        self.history = []\n\n    def deposit(self, amount):\n        if amount <= 0:\n            raise ValueError(\"Сумма должна быть > 0\")\n        self._balance += amount\n        self.history.append(f\"+{amount}\")\n\n    def withdraw(self, amount):\n        if amount > self._balance:\n            raise ValueError(\"Недостаточно средств\")\n        self._balance -= amount\n        self.history.append(f\"-{amount}\")\n\n    @property\n    def balance(self):\n        return self._balance\n\n    def __repr__(self):\n        return f\"Account({self.owner!r}, balance={self._balance})\"\n\nacc = Account(\"Алиса\", 1000)\nacc.deposit(500)\nacc.withdraw(300)\nacc.deposit(200)\nprint(acc)\nprint(\"История:\", acc.history)\nprint(\"Баланс :\", acc.balance)\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Account(''Алиса'', balance=1400)
+
+      История: [''+500'', ''-300'', ''+200'']
+
+      Баланс : 1400
+
+      '

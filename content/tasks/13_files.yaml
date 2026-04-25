@@ -1,0 +1,285 @@
+topic_id: 13_files
+tasks:
+- id: 13_files-01
+  topic_id: 13_files
+  index: 1
+  title: Записать файл
+  statement: '### Задача 1. Записать файл
+
+
+    Запиши в `notes.txt` три строки: «Первая строка», «Вторая строка», «Третья строка». Используй режим `"w"` и контекстный менеджер `with`.'
+  reference: "\"\"\"Задача 1. Записать в файл несколько строк.\"\"\"\nwith open(\"notes.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"Первая строка\\n\")\n    f.write(\"Вторая строка\\n\")\n    f.write(\"Третья строка\\n\")\nprint(\"Записано\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Записано
+
+      '
+- id: 13_files-02
+  topic_id: 13_files
+  index: 2
+  title: Прочитать целиком
+  statement: '### Задача 2. Прочитать целиком
+
+
+    Прочитай содержимое `notes.txt` методом `.read()` и выведи на экран.'
+  reference: "\"\"\"Задача 2. Прочитать файл целиком.\"\"\"\nwith open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:\n    text = f.read()\nprint(text, end=\"\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Первая строка
+
+      Вторая строка
+
+      Третья строка
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '
+- id: 13_files-03
+  topic_id: 13_files
+  index: 3
+  title: Прочитать построчно с нумерацией
+  statement: '### Задача 3. Прочитать построчно с нумерацией
+
+
+    Прочитай `notes.txt` построчно через `for line in f`. Выведи каждую строку с её номером (с 1).
+
+
+    *Подсказка:* `enumerate(f, start=1)`.'
+  reference: "\"\"\"Задача 3. Прочитать файл построчно с нумерацией.\"\"\"\nwith open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:\n    for i, line in enumerate(f, start=1):\n        print(f\"{i}: {line.rstrip()}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '1: Первая строка
+
+      2: Вторая строка
+
+      3: Третья строка
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '
+- id: 13_files-04
+  topic_id: 13_files
+  index: 4
+  title: Дописать в файл
+  statement: '### Задача 4. Дописать в файл
+
+
+    Добавь в конец `notes.txt` строку «Дополнительная строка» (режим `"a"` — append). Выведи весь файл, чтобы убедиться.'
+  reference: "\"\"\"Задача 4. Дописать в существующий файл (режим 'a').\"\"\"\nwith open(\"notes.txt\", \"a\", encoding=\"utf-8\") as f:\n    f.write(\"Дополнительная строка\\n\")\n\nwith open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:\n    print(f.read(), end=\"\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Первая строка
+
+      Вторая строка
+
+      Третья строка
+
+      Дополнительная строка
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '
+- id: 13_files-05
+  topic_id: 13_files
+  index: 5
+  title: Подсчёт строк и слов
+  statement: '### Задача 5. Подсчёт строк и слов
+
+
+    Открой `notes.txt` и посчитай, сколько в нём строк и сколько слов.'
+  reference: "\"\"\"Задача 5. Подсчитать количество строк и слов в файле.\"\"\"\nlines = 0\nwords = 0\nwith open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:\n    for line in f:\n        lines += 1\n        words += len(line.split())\nprint(f\"Строк: {lines}, слов: {words}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Строк: 3, слов: 6
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '
+- id: 13_files-06
+  topic_id: 13_files
+  index: 6
+  title: Самая длинная строка
+  statement: '### Задача 6. Самая длинная строка
+
+
+    Найди в `notes.txt` самую длинную строку (по количеству символов, без `\n`).'
+  reference: "\"\"\"Задача 6. Найти самую длинную строку в файле.\"\"\"\nlongest = \"\"\nwith open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:\n    for line in f:\n        line = line.rstrip()\n        if len(line) > len(longest):\n            longest = line\nprint(f\"Самая длинная: '{longest}' ({len(longest)} символов)\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Самая длинная: ''Первая строка'' (13 символов)
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '
+- id: 13_files-07
+  topic_id: 13_files
+  index: 7
+  title: Сохранить словарь в JSON
+  statement: '### Задача 7. Сохранить словарь в JSON
+
+
+    Запиши словарь:
+
+    ```python
+
+    {"name": "Алиса", "age": 25, "hobbies": ["читать", "бегать"], "active": True}
+
+    ```
+
+    в файл `user.json` так, чтобы кириллица читалась нормально и был отступ 2.
+
+
+    *Подсказка:* `json.dump(obj, f, ensure_ascii=False, indent=2)`.'
+  reference: "\"\"\"Задача 7. Записать словарь в JSON.\"\"\"\nimport json\n\nuser = {\n    \"name\": \"Алиса\",\n    \"age\": 25,\n    \"hobbies\": [\"читать\", \"бегать\"],\n    \"active\": True,\n}\nwith open(\"user.json\", \"w\", encoding=\"utf-8\") as f:\n    json.dump(user, f, ensure_ascii=False, indent=2)\nprint(\"Записано в user.json\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Записано в user.json
+
+      '
+- id: 13_files-08
+  topic_id: 13_files
+  index: 8
+  title: Прочитать JSON
+  statement: '### Задача 8. Прочитать JSON
+
+
+    Прочитай `user.json` обратно. Убедись, что получился `dict`. Выведи имя пользователя и хобби через запятую.'
+  reference: "\"\"\"Задача 8. Прочитать JSON обратно.\"\"\"\nimport json\n\nwith open(\"user.json\", \"r\", encoding=\"utf-8\") as f:\n    user = json.load(f)\nprint(user)\nprint(type(user))\nprint(user[\"name\"], \"—\", \", \".join(user[\"hobbies\"]))\n"
+  check:
+    kind: stdout
+    expected_stdout: '{''name'': ''Алиса'', ''age'': 25, ''hobbies'': [''читать'', ''бегать''], ''active'': True}
+
+      <class ''dict''>
+
+      Алиса — читать, бегать
+
+      '
+    extra_files:
+      user.json: '{"name": "Алиса", "age": 25, "hobbies": ["читать", "бегать"], "active": true}
+
+        '
+- id: 13_files-09
+  topic_id: 13_files
+  index: 9
+  title: pathlib
+  statement: '### Задача 9. pathlib
+
+
+    Используя `pathlib.Path("notes.txt")`, выведи: существует ли файл, его имя, имя без расширения, расширение и размер в байтах.'
+  reference: '"""Задача 9. Работа с pathlib."""
+
+    from pathlib import Path
+
+
+    p = Path("notes.txt")
+
+    print("Существует:", p.exists())
+
+    print("Имя:       ", p.name)
+
+    print("Без ext:   ", p.stem)
+
+    print("Расширение:", p.suffix)
+
+    print("Размер:    ", p.stat().st_size, "байт")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Существует: True
+
+      Имя:        notes.txt
+
+      Без ext:    notes
+
+      Расширение: .txt
+
+      Размер:     78 байт
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '
+- id: 13_files-10
+  topic_id: 13_files
+  index: 10
+  title: Прочитать CSV
+  statement: '### Задача 10. Прочитать CSV
+
+
+    Сначала создай файл `people.csv` со строками:
+
+    ```
+
+    name,age,city
+
+    Алиса,25,Москва
+
+    Боб,30,Питер
+
+    Карл,22,Казань
+
+    ```
+
+    Затем прочитай его и выведи каждую строку как словарь.
+
+
+    *Подсказка:* первую строку `f.readline()` рассмотри как заголовки. Дальше `dict(zip(header, values))`.
+
+
+    > В реальной жизни для CSV лучше использовать стандартный модуль `csv`, но здесь — учимся ручному разбору.'
+  reference: "\"\"\"Задача 10. Прочитать простой CSV-файл.\"\"\"\n# Сначала создадим CSV\ncsv_text = \"\"\"name,age,city\nАлиса,25,Москва\nБоб,30,Питер\nКарл,22,Казань\n\"\"\"\nwith open(\"people.csv\", \"w\", encoding=\"utf-8\") as f:\n    f.write(csv_text)\n\n# Теперь прочитаем\nwith open(\"people.csv\", \"r\", encoding=\"utf-8\") as f:\n    header = f.readline().rstrip().split(\",\")\n    print(\"Колонки:\", header)\n    for line in f:\n        values = line.rstrip().split(\",\")\n        row = dict(zip(header, values))\n        print(row)\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Колонки: [''name'', ''age'', ''city'']
+
+      {''name'': ''Алиса'', ''age'': ''25'', ''city'': ''Москва''}
+
+      {''name'': ''Боб'', ''age'': ''30'', ''city'': ''Питер''}
+
+      {''name'': ''Карл'', ''age'': ''22'', ''city'': ''Казань''}
+
+      '
+    extra_files:
+      notes.txt: 'Первая строка
+
+        Вторая строка
+
+        Третья строка
+
+        '

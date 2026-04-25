@@ -1,0 +1,289 @@
+topic_id: 05_io
+tasks:
+- id: 05_io-01
+  topic_id: 05_io
+  index: 1
+  title: Приветствие
+  statement: '### Задача 1. Приветствие
+
+
+    Программа спрашивает имя и выводит «Привет, ...!».'
+  reference: '"""Задача 1. Спросить имя и поздороваться.
+
+    Реальная версия использует input(); здесь — захардкоженный ввод для самопроверки."""
+
+    # name = input("Как тебя зовут? ")
+
+    name = "Алиса"
+
+    print(f"Привет, {name}!")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Привет, Алиса!
+
+      '
+    stdin: 'Алиса
+
+      '
+  needs_stdin: true
+- id: 05_io-02
+  topic_id: 05_io
+  index: 2
+  title: Сумма двух
+  statement: '### Задача 2. Сумма двух
+
+
+    Программа просит ввести два целых числа (на двух строках) и выводит их сумму.'
+  reference: '"""Задача 2. Спросить два числа и вывести их сумму.
+
+    ВНИМАНИЕ: input() возвращает строку, нужно преобразовать к int."""
+
+    # a = int(input("Первое число: "))
+
+    # b = int(input("Второе число: "))
+
+    a, b = 7, 13
+
+    print(a + b)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '20
+
+      '
+    stdin: '7
+
+      13
+
+      '
+  needs_stdin: true
+- id: 05_io-03
+  topic_id: 05_io
+  index: 3
+  title: Квадрат числа
+  statement: '### Задача 3. Квадрат числа
+
+
+    Программа просит число и выводит его квадрат.'
+  reference: '"""Задача 3. Прочитать строку с числом и вывести его квадрат."""
+
+    # s = input("Введите число: ")
+
+    s = "9"
+
+    n = int(s)
+
+    print(n * n)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '81
+
+      '
+    stdin: '9
+
+      '
+  needs_stdin: true
+- id: 05_io-04
+  topic_id: 05_io
+  index: 4
+  title: Сумма трёх чисел
+  statement: '### Задача 4. Сумма трёх чисел
+
+
+    Прочитать три числа (на трёх строках) и вывести их сумму.'
+  reference: '"""Задача 4. Сумма трёх введённых чисел."""
+
+    # a = int(input())
+
+    # b = int(input())
+
+    # c = int(input())
+
+    a, b, c = 5, 10, 15
+
+    print(a + b + c)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '30
+
+      '
+    stdin: '5
+
+      10
+
+      15
+
+      '
+  needs_stdin: true
+- id: 05_io-05
+  topic_id: 05_io
+  index: 5
+  title: Среднее трёх
+  statement: '### Задача 5. Среднее трёх
+
+
+    Прочитать три числа и вывести их среднее арифметическое (как `float`).'
+  reference: '"""Задача 5. Среднее трёх чисел."""
+
+    # a = float(input())
+
+    # b = float(input())
+
+    # c = float(input())
+
+    a, b, c = 4.0, 7.0, 10.0
+
+    print((a + b + c) / 3)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '7.0
+
+      '
+    stdin: '4
+
+      7
+
+      10
+
+      '
+  needs_stdin: true
+- id: 05_io-06
+  topic_id: 05_io
+  index: 6
+  title: Площадь круга
+  statement: '### Задача 6. Площадь круга
+
+
+    Прочитать радиус (с дробной частью!) и вывести площадь круга с двумя знаками после запятой.'
+  reference: '"""Задача 6. Прочитать радиус и посчитать площадь круга."""
+
+    import math
+
+    # r = float(input("Радиус: "))
+
+    r = 5.0
+
+    print(f"S = {math.pi * r ** 2:.2f}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'S = 78.54
+
+      '
+    stdin: '5
+
+      '
+  needs_stdin: true
+- id: 05_io-07
+  topic_id: 05_io
+  index: 7
+  title: Два числа в одной строке
+  statement: '### Задача 7. Два числа в одной строке
+
+
+    Пользователь вводит два числа в **одной** строке через пробел: `7 13`. Прочитай их и выведи сумму.
+
+
+    *Подсказка:* `input().split()` разбивает по пробелам, `map(int, ...)` превращает каждый кусочек в `int`.'
+  reference: '"""Задача 7. Прочитать ДВА числа в ОДНОЙ строке через пробел и вывести их сумму.
+
+    Например, ввод: ''7 13'' → 20."""
+
+    # line = input("Два числа через пробел: ")
+
+    line = "7 13"
+
+    a, b = map(int, line.split())
+
+    print(a + b)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '20
+
+      '
+    stdin: '7 13
+
+      '
+  needs_stdin: true
+- id: 05_io-08
+  topic_id: 05_io
+  index: 8
+  title: Таблица квадратов
+  statement: '### Задача 8. Таблица квадратов
+
+
+    Прочитать `N` и вывести таблицу: число и его квадрат, через табуляцию, для всех чисел от 1 до N включительно.'
+  reference: "\"\"\"Задача 8. Прочитать число N и вывести таблицу квадратов от 1 до N.\"\"\"\n# n = int(input(\"N = \"))\nn = 5\nfor i in range(1, n + 1):\n    print(f\"{i}\\t{i * i}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: "1\t1\n2\t4\n3\t9\n4\t16\n5\t25\n"
+    stdin: '5
+
+      '
+  needs_stdin: true
+- id: 05_io-09
+  topic_id: 05_io
+  index: 9
+  title: Меняем местами
+  statement: '### Задача 9. Меняем местами
+
+
+    Прочитать имя и фамилию (на разных строках). Вывести «Фамилия Имя».'
+  reference: '"""Задача 9. Прочитать имя и фамилию (две отдельные строки) и вывести их в обратном порядке."""
+
+    # first = input("Имя: ")
+
+    # last = input("Фамилия: ")
+
+    first = "Иван"
+
+    last = "Петров"
+
+    print(f"{last} {first}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Петров Иван
+
+      '
+    stdin: 'Иван
+
+      Петров
+
+      '
+  needs_stdin: true
+- id: 05_io-10
+  topic_id: 05_io
+  index: 10
+  title: Калькулятор
+  statement: '### Задача 10. Калькулятор
+
+
+    Прочитать: число `a`, знак операции (`+`, `-`, `*`, `/`), число `b`. Вывести результат соответствующей операции. Если знак не из четырёх — вывести «Неизвестная операция».'
+  reference: "\"\"\"Задача 10. Простой калькулятор.\nПрочитать число, операцию (+ - * /), число. Вывести результат.\"\"\"\n# a = float(input(\"a = \"))\n# op = input(\"op = \")\n# b = float(input(\"b = \"))\na, op, b = 12, \"*\", 4\nif op == \"+\":\n    print(a + b)\nelif op == \"-\":\n    print(a - b)\nelif op == \"*\":\n    print(a * b)\nelif op == \"/\":\n    print(a / b)\nelse:\n    print(\"Неизвестная операция\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '48
+
+      '
+    stdin: '12
+
+      *
+
+      4
+
+      '
+  needs_stdin: true

@@ -1,0 +1,268 @@
+topic_id: 04_operators
+tasks:
+- id: 04_operators-01
+  topic_id: 04_operators
+  index: 1
+  title: Все операции
+  statement: '### Задача 1. Все операции
+
+
+    Даны `a = 17, b = 5`. Выведи результаты всех арифметических операций (сумма, разность, произведение, обычное и целочисленное деление, остаток, степень).'
+  reference: '"""Задача 1. Все арифметические операции для двух чисел."""
+
+    a, b = 17, 5
+
+    print("Сумма:        ", a + b)
+
+    print("Разность:     ", a - b)
+
+    print("Произведение: ", a * b)
+
+    print("Частное:      ", a / b)
+
+    print("Целочисленное:", a // b)
+
+    print("Остаток:      ", a % b)
+
+    print("Степень:      ", a ** b)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Сумма:         22
+
+      Разность:      12
+
+      Произведение:  85
+
+      Частное:       3.4
+
+      Целочисленное: 3
+
+      Остаток:       2
+
+      Степень:       1419857
+
+      '
+- id: 04_operators-02
+  topic_id: 04_operators
+  index: 2
+  title: Часы и минуты
+  statement: '### Задача 2. Часы и минуты
+
+
+    Дано `total_minutes = 137`. Выведи, сколько это полных часов и оставшихся минут.'
+  reference: '"""Задача 2. Сколько полных часов и минут в N минутах?"""
+
+    total_minutes = 137
+
+    hours = total_minutes // 60
+
+    minutes = total_minutes % 60
+
+    print(f"{total_minutes} минут = {hours} ч {minutes} мин")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '137 минут = 2 ч 17 мин
+
+      '
+- id: 04_operators-03
+  topic_id: 04_operators
+  index: 3
+  title: Степень двойки
+  statement: '### Задача 3. Степень двойки
+
+
+    Выведи 2 в степени 10.'
+  reference: '"""Задача 3. Возвести 2 в степень 10."""
+
+    print(2 ** 10)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '1024
+
+      '
+- id: 04_operators-04
+  topic_id: 04_operators
+  index: 4
+  title: Последняя цифра
+  statement: '### Задача 4. Последняя цифра
+
+
+    Дано трёхзначное число. Выведи его последнюю цифру **без преобразования в строку** — только арифметикой.'
+  reference: '"""Задача 4. Последняя цифра трёхзначного числа."""
+
+    n = 547
+
+    last_digit = n % 10
+
+    print(last_digit)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '7
+
+      '
+- id: 04_operators-05
+  topic_id: 04_operators
+  index: 5
+  title: Сумма цифр трёхзначного числа
+  statement: '### Задача 5. Сумма цифр трёхзначного числа
+
+
+    Дано `n = 547`. Найди сумму его цифр (5 + 4 + 7 = 16) с помощью операторов `//` и `%`.'
+  reference: '"""Задача 5. Сумма цифр трёхзначного числа."""
+
+    n = 547
+
+    s = n // 100 + (n // 10) % 10 + n % 10
+
+    print(s)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '16
+
+      '
+- id: 04_operators-06
+  topic_id: 04_operators
+  index: 6
+  title: Чётность
+  statement: '### Задача 6. Чётность
+
+
+    Дано число `n = 42`. Выведи `True`, если оно чётное, и `False` — иначе. *Подсказка:* остаток от деления.'
+  reference: '"""Задача 6. Чётное ли число? (через остаток от деления)"""
+
+    n = 42
+
+    print(n % 2 == 0)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'True
+
+      '
+- id: 04_operators-07
+  topic_id: 04_operators
+  index: 7
+  title: Рубли и копейки
+  statement: '### Задача 7. Рубли и копейки
+
+
+    Дано общее количество копеек, например `1234`. Выведи в виде `1234 коп = 12 руб 34 коп`.'
+  reference: '"""Задача 7. Дано количество копеек. Вывести, сколько это рублей и копеек.
+
+    Например, 1234 коп = 12 руб 34 коп."""
+
+    kopecks_total = 1234
+
+    rubles = kopecks_total // 100
+
+    kopecks = kopecks_total % 100
+
+    print(f"{kopecks_total} коп = {rubles} руб {kopecks} коп")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '1234 коп = 12 руб 34 коп
+
+      '
+- id: 04_operators-08
+  topic_id: 04_operators
+  index: 8
+  title: Секунды → H:MM:SS
+  statement: '### Задача 8. Секунды → H:MM:SS
+
+
+    Дано `total_seconds = 7384`. Выведи в формате `2:03:04` (минуты и секунды — всегда двузначные).
+
+
+    *Подсказка:* `f"{m:02d}"` — двузначное число с ведущим нулём.'
+  reference: '"""Задача 8. Перевести total секунд в формат H:MM:SS."""
+
+    total_seconds = 7384
+
+    h = total_seconds // 3600
+
+    m = (total_seconds % 3600) // 60
+
+    s = total_seconds % 60
+
+    print(f"{h}:{m:02d}:{s:02d}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '2:03:04
+
+      '
+- id: 04_operators-09
+  topic_id: 04_operators
+  index: 9
+  title: Площадь круга
+  statement: '### Задача 9. Площадь круга
+
+
+    Дан радиус `r = 5`. Найди площадь круга `S = π·r²`. Выведи с тремя знаками после точки.
+
+
+    *Подсказка:* `import math` → `math.pi`.'
+  reference: '"""Задача 9. Площадь круга по радиусу. Округлить до 3 знаков."""
+
+    import math
+
+    r = 5
+
+    area = math.pi * r ** 2
+
+    print(f"S = {area:.3f}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'S = 78.540
+
+      '
+- id: 04_operators-10
+  topic_id: 04_operators
+  index: 10
+  title: Сложный процент
+  statement: '### Задача 10. Сложный процент
+
+
+    Даны: капитал `P = 100000`, годовая ставка `r = 10` процентов, срок `n = 5` лет. По формуле сложного процента посчитай итоговую сумму:
+
+
+    `total = P · (1 + r/100)^n`
+
+
+    Выведи с двумя знаками после точки.'
+  reference: '"""Задача 10. Сложный процент.
+
+    Капитал P, ставка r% годовых, n лет. Итоговая сумма = P * (1 + r/100)^n."""
+
+    P = 100000
+
+    r = 10
+
+    n = 5
+
+    total = P * (1 + r / 100) ** n
+
+    print(f"Через {n} лет: {total:.2f} руб")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Через 5 лет: 161051.00 руб
+
+      '

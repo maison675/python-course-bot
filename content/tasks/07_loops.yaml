@@ -1,0 +1,174 @@
+topic_id: 07_loops
+tasks:
+- id: 07_loops-01
+  topic_id: 07_loops
+  index: 1
+  title: Сумма от 1 до N
+  statement: '### Задача 1. Сумма от 1 до N
+
+
+    Дано `n = 100`. Найди сумму всех чисел от 1 до 100. *(Должно получиться 5050.)*'
+  reference: "\"\"\"Задача 1. Сумма чисел от 1 до N.\"\"\"\nn = 100\ntotal = 0\nfor i in range(1, n + 1):\n    total += i\nprint(total)\n"
+  check:
+    kind: stdout
+    expected_stdout: '5050
+
+      '
+- id: 07_loops-02
+  topic_id: 07_loops
+  index: 2
+  title: Факториал
+  statement: '### Задача 2. Факториал
+
+
+    Дано `n = 6`. Посчитай `n! = 1 · 2 · 3 · ... · n` через цикл.'
+  reference: "\"\"\"Задача 2. Факториал N через цикл.\"\"\"\nn = 6\nresult = 1\nfor i in range(2, n + 1):\n    result *= i\nprint(result)\n"
+  check:
+    kind: stdout
+    expected_stdout: '720
+
+      '
+- id: 07_loops-03
+  topic_id: 07_loops
+  index: 3
+  title: Таблица умножения
+  statement: '### Задача 3. Таблица умножения
+
+
+    Выведи таблицу умножения на 7 (от 7×1 до 7×10) в формате `7 × 1 = 7`.'
+  reference: "\"\"\"Задача 3. Таблица умножения на N.\"\"\"\nn = 7\nfor i in range(1, 11):\n    print(f\"{n} × {i} = {n * i}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '7 × 1 = 7
+
+      7 × 2 = 14
+
+      7 × 3 = 21
+
+      7 × 4 = 28
+
+      7 × 5 = 35
+
+      7 × 6 = 42
+
+      7 × 7 = 49
+
+      7 × 8 = 56
+
+      7 × 9 = 63
+
+      7 × 10 = 70
+
+      '
+- id: 07_loops-04
+  topic_id: 07_loops
+  index: 4
+  title: Развернуть число
+  statement: '### Задача 4. Развернуть число
+
+
+    Дано целое число `n = 12345`. Получи число `54321`. **Без преобразования в строку**, только арифметикой.'
+  reference: "\"\"\"Задача 4. Развернуть число (например, 12345 → 54321) — без преобразования в строку.\"\"\"\nn = 12345\nreversed_n = 0\nwhile n > 0:\n    reversed_n = reversed_n * 10 + n % 10\n    n //= 10\nprint(reversed_n)\n"
+  check:
+    kind: stdout
+    expected_stdout: '54321
+
+      '
+- id: 07_loops-05
+  topic_id: 07_loops
+  index: 5
+  title: Сколько цифр в числе
+  statement: '### Задача 5. Сколько цифр в числе
+
+
+    Дано `n = 8472301`. Найди количество цифр через цикл, **без `len(str(n))`**.'
+  reference: "\"\"\"Задача 5. Количество цифр в числе.\"\"\"\nn = 8472301\ncount = 0\nm = n\nwhile m > 0:\n    count += 1\n    m //= 10\nprint(count)\n"
+  check:
+    kind: stdout
+    expected_stdout: '7
+
+      '
+- id: 07_loops-06
+  topic_id: 07_loops
+  index: 6
+  title: Сумма цифр
+  statement: '### Задача 6. Сумма цифр
+
+
+    Дано `n = 8472301`. Найди сумму его цифр.'
+  reference: "\"\"\"Задача 6. Сумма цифр числа через цикл.\"\"\"\nn = 8472301\ntotal = 0\nwhile n > 0:\n    total += n % 10\n    n //= 10\nprint(total)\n"
+  check:
+    kind: stdout
+    expected_stdout: '25
+
+      '
+- id: 07_loops-07
+  topic_id: 07_loops
+  index: 7
+  title: Числа Фибоначчи
+  statement: '### Задача 7. Числа Фибоначчи
+
+
+    Выведи первые 10 чисел Фибоначчи: `0 1 1 2 3 5 8 13 21 34`.
+
+
+    *Подсказка:* `a, b = b, a + b` — обновляет обе переменные одновременно.'
+  reference: "\"\"\"Задача 7. Первые N чисел Фибоначчи.\"\"\"\nn = 10\na, b = 0, 1\nfor _ in range(n):\n    print(a, end=\" \")\n    a, b = b, a + b\nprint()\n"
+  check:
+    kind: stdout
+    expected_stdout: "0 1 1 2 3 5 8 13 21 34 \n"
+- id: 07_loops-08
+  topic_id: 07_loops
+  index: 8
+  title: Степень без `**`
+  statement: '### Задача 8. Степень без `**`
+
+
+    Дано `base = 3, exp = 5`. Посчитай `base ** exp` через цикл, **не используя `**`**.'
+  reference: "\"\"\"Задача 8. Возведение в степень БЕЗ использования ** (через цикл).\"\"\"\nbase = 3\nexp = 5\nresult = 1\nfor _ in range(exp):\n    result *= base\nprint(result)\n"
+  check:
+    kind: stdout
+    expected_stdout: '243
+
+      '
+- id: 07_loops-09
+  topic_id: 07_loops
+  index: 9
+  title: Простые числа до N
+  statement: '### Задача 9. Простые числа до N
+
+
+    Дано `n = 30`. Выведи все простые числа от 2 до n.
+
+
+    *Подсказка:* для проверки простоты числа `num` достаточно перебрать делители от 2 до √num включительно.'
+  reference: "\"\"\"Задача 9. Все простые числа до N.\"\"\"\nn = 30\nfor num in range(2, n + 1):\n    is_prime = True\n    for d in range(2, int(num ** 0.5) + 1):\n        if num % d == 0:\n            is_prime = False\n            break\n    if is_prime:\n        print(num, end=\" \")\nprint()\n"
+  check:
+    kind: stdout
+    expected_stdout: "2 3 5 7 11 13 17 19 23 29 \n"
+- id: 07_loops-10
+  topic_id: 07_loops
+  index: 10
+  title: Угадай число
+  statement: '### Задача 10. Угадай число
+
+
+    Компьютер загадал число 7. На входе — список «попыток» `[50, 25, 10, 7]`. Перебери их по очереди:
+
+    - если попытка > 7 — «слишком много»;
+
+    - если < 7 — «слишком мало»;
+
+    - если == 7 — «угадал» и выход из цикла (`break`).'
+  reference: "\"\"\"Задача 10. Угадай число (компьютер «вводит» 7).\nДемонстрация while True / break.\"\"\"\nguesses = [50, 25, 10, 7]\nsecret = 7\nfor g in guesses:\n    if g == secret:\n        print(f\"Угадал: {g}!\")\n        break\n    elif g > secret:\n        print(f\"{g} — слишком много\")\n    else:\n        print(f\"{g} — слишком мало\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '50 — слишком много
+
+      25 — слишком много
+
+      10 — слишком много
+
+      Угадал: 7!
+
+      '

@@ -1,0 +1,172 @@
+topic_id: 11_functions
+tasks:
+- id: 11_functions-01
+  topic_id: 11_functions
+  index: 1
+  title: Простая функция
+  statement: '### Задача 1. Простая функция
+
+
+    Напиши функцию `add(a, b)`, которая возвращает сумму. Проверь её на: `(2, 3)`, `(10, -7)`, `("Hello, ", "World!")`.'
+  reference: "\"\"\"Задача 1. Простая функция add(a, b).\"\"\"\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))\nprint(add(10, -7))\nprint(add(\"Hello, \", \"World!\"))\n"
+  check:
+    kind: stdout
+    expected_stdout: '5
+
+      3
+
+      Hello, World!
+
+      '
+- id: 11_functions-02
+  topic_id: 11_functions
+  index: 2
+  title: Параметр по умолчанию
+  statement: '### Задача 2. Параметр по умолчанию
+
+
+    Напиши `greet(name, greeting="Привет")`. Если `greeting` не передан — пишет «Привет, ...!». Проверь во всех трёх формах: только имя, имя+фраза, через именованный аргумент.'
+  reference: "\"\"\"Задача 2. Параметр по умолчанию.\"\"\"\ndef greet(name, greeting=\"Привет\"):\n    print(f\"{greeting}, {name}!\")\n\ngreet(\"Алиса\")\ngreet(\"Боб\", \"Здравствуй\")\ngreet(\"Карл\", greeting=\"Йоу\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Привет, Алиса!
+
+      Здравствуй, Боб!
+
+      Йоу, Карл!
+
+      '
+- id: 11_functions-03
+  topic_id: 11_functions
+  index: 3
+  title: Возврат нескольких значений
+  statement: '### Задача 3. Возврат нескольких значений
+
+
+    Напиши `divmod_(a, b)`, которая возвращает **пару** (целое частное, остаток). Используй её, распаковав в две переменные, и выведи равенство `a = q × b + r`.'
+  reference: "\"\"\"Задача 3. Возврат нескольких значений (на самом деле — кортежа).\"\"\"\ndef divmod_(a, b):\n    return a // b, a % b\n\nq, r = divmod_(17, 5)\nprint(f\"{17} = {q} × {5} + {r}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: '17 = 3 × 5 + 2
+
+      '
+- id: 11_functions-04
+  topic_id: 11_functions
+  index: 4
+  title: is_palindrome
+  statement: '### Задача 4. is_palindrome
+
+
+    Напиши **чистую** функцию `is_palindrome(s)`, которая возвращает `bool` (внутри **не** делает `print`). Вне функции выведи результаты для нескольких строк.'
+  reference: "\"\"\"Задача 4. is_palindrome — функция как чистая логика, без print внутри.\"\"\"\ndef is_palindrome(s: str) -> bool:\n    cleaned = s.lower().replace(\" \", \"\")\n    return cleaned == cleaned[::-1]\n\nfor word in [\"шалаш\", \"Python\", \"А роза упала на лапу Азора\"]:\n    print(word, \"→\", is_palindrome(word))\n"
+  check:
+    kind: stdout
+    expected_stdout: 'шалаш → True
+
+      Python → False
+
+      А роза упала на лапу Азора → True
+
+      '
+- id: 11_functions-05
+  topic_id: 11_functions
+  index: 5
+  title: '*args'
+  statement: '### Задача 5. *args
+
+
+    Напиши `total(*nums)`, которая принимает любое количество чисел и возвращает их сумму. Проверь на `(1, 2, 3)`, `(10, 20, 30, 40, 50)`, без аргументов.'
+  reference: "\"\"\"Задача 5. *args — произвольное количество позиционных аргументов.\"\"\"\ndef total(*nums):\n    s = 0\n    for n in nums:\n        s += n\n    return s\n\nprint(total(1, 2, 3))\nprint(total(10, 20, 30, 40, 50))\nprint(total())   # 0\n"
+  check:
+    kind: stdout
+    expected_stdout: '6
+
+      150
+
+      0
+
+      '
+- id: 11_functions-06
+  topic_id: 11_functions
+  index: 6
+  title: '**kwargs'
+  statement: '### Задача 6. **kwargs
+
+
+    Напиши `show_user(**info)`, которая выводит каждый ключ и значение в формате `key = value`.'
+  reference: "\"\"\"Задача 6. **kwargs — произвольные именованные аргументы.\"\"\"\ndef show_user(**info):\n    for key, value in info.items():\n        print(f\"{key} = {value}\")\n\nshow_user(name=\"Алиса\", age=25, city=\"Москва\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'name = Алиса
+
+      age = 25
+
+      city = Москва
+
+      '
+- id: 11_functions-07
+  topic_id: 11_functions
+  index: 7
+  title: Type hints + проверка
+  statement: '### Задача 7. Type hints + проверка
+
+
+    Напиши `average(numbers: list[float]) -> float`. Если список пуст — вернуть 0.0 (вместо ошибки деления). Проверь.'
+  reference: "\"\"\"Задача 7. Аннотации типов (type hints).\nФункция, считающая среднее списка чисел.\"\"\"\ndef average(numbers: list[float]) -> float:\n    if not numbers:\n        return 0.0\n    return sum(numbers) / len(numbers)\n\nprint(average([4, 7, 1, 9, 3, 2]))\nprint(average([]))\n"
+  check:
+    kind: stdout
+    expected_stdout: '4.333333333333333
+
+      0.0
+
+      '
+- id: 11_functions-08
+  topic_id: 11_functions
+  index: 8
+  title: Вложенная функция
+  statement: '### Задача 8. Вложенная функция
+
+
+    Напиши `stats(numbers)`, которая возвращает кортеж `(среднее, дисперсия)`. **Внутри** объяви вспомогательную функцию `square(x)`. Дисперсия = среднее квадратов отклонений от среднего.'
+  reference: "\"\"\"Задача 8. Вложенная (вспомогательная) функция.\"\"\"\ndef stats(numbers):\n    def square(x):\n        return x * x\n\n    avg = sum(numbers) / len(numbers)\n    var = sum(square(n - avg) for n in numbers) / len(numbers)\n    return avg, var\n\navg, var = stats([2, 4, 4, 4, 5, 5, 7, 9])\nprint(f\"Среднее = {avg}, Дисперсия = {var}\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'Среднее = 5.0, Дисперсия = 4.0
+
+      '
+- id: 11_functions-09
+  topic_id: 11_functions
+  index: 9
+  title: Функция как аргумент
+  statement: '### Задача 9. Функция как аргумент
+
+
+    Напиши `apply_to_all(func, items)`, которая возвращает список `[func(x) for x in items]`, но через обычный цикл. Проверь, передавая в неё разные функции.'
+  reference: "\"\"\"Задача 9. Функция как аргумент функции (functions are first-class).\"\"\"\ndef apply_to_all(func, items):\n    result = []\n    for x in items:\n        result.append(func(x))\n    return result\n\ndef square(x):\n    return x * x\n\ndef double(x):\n    return x * 2\n\nprint(apply_to_all(square, [1, 2, 3, 4]))\nprint(apply_to_all(double, [1, 2, 3, 4]))\nprint(apply_to_all(str.upper, [\"hi\", \"hello\"]))\n"
+  check:
+    kind: stdout
+    expected_stdout: '[1, 4, 9, 16]
+
+      [2, 4, 6, 8]
+
+      [''HI'', ''HELLO'']
+
+      '
+- id: 11_functions-10
+  topic_id: 11_functions
+  index: 10
+  title: Замыкание
+  statement: '### Задача 10. Замыкание
+
+
+    Напиши `make_multiplier(factor)`, которая возвращает функцию-умножитель на `factor`. Создай `double` и `triple` и проверь.'
+  reference: "\"\"\"Задача 10. Замыкание (closure) — функция, помнящая своё окружение.\"\"\"\ndef make_multiplier(factor):\n    def multiplier(x):\n        return x * factor\n    return multiplier\n\ndouble = make_multiplier(2)\ntriple = make_multiplier(3)\nprint(double(5))\nprint(triple(5))\nprint(double(10))\n"
+  check:
+    kind: stdout
+    expected_stdout: '10
+
+      15
+
+      20
+
+      '

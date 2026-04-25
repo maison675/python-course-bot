@@ -1,0 +1,185 @@
+topic_id: 12_recursion
+tasks:
+- id: 12_recursion-01
+  topic_id: 12_recursion
+  index: 1
+  title: Факториал
+  statement: '### Задача 1. Факториал
+
+
+    `factorial(n) = n × factorial(n-1)`, `factorial(0) = 1`. Реализуй и проверь для `n` от 0 до 6.'
+  reference: "\"\"\"Задача 1. Факториал через рекурсию.\"\"\"\ndef factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\nfor i in range(7):\n    print(i, factorial(i))\n"
+  check:
+    kind: stdout
+    expected_stdout: '0 1
+
+      1 1
+
+      2 2
+
+      3 6
+
+      4 24
+
+      5 120
+
+      6 720
+
+      '
+- id: 12_recursion-02
+  topic_id: 12_recursion
+  index: 2
+  title: Числа Фибоначчи
+  statement: '### Задача 2. Числа Фибоначчи
+
+
+    `fib(n) = fib(n-1) + fib(n-2)`, `fib(0) = 0`, `fib(1) = 1`. Выведи первые 10 чисел.
+
+
+    > ⚠️ Это **учебная** реализация. Она экспоненциально медленная: `fib(30)` уже считается заметное время. Реальные применения используют мемоизацию или итерации.'
+  reference: "\"\"\"Задача 2. N-е число Фибоначчи через рекурсию (учебно — не оптимально!).\"\"\"\ndef fib(n):\n    if n < 2:\n        return n\n    return fib(n - 1) + fib(n - 2)\n\nfor i in range(10):\n    print(fib(i), end=\" \")\nprint()\n"
+  check:
+    kind: stdout
+    expected_stdout: "0 1 1 2 3 5 8 13 21 34 \n"
+- id: 12_recursion-03
+  topic_id: 12_recursion
+  index: 3
+  title: Сумма цифр
+  statement: '### Задача 3. Сумма цифр
+
+
+    `digit_sum(n)` через рекурсию: если `n < 10` — это и есть результат, иначе `n % 10 + digit_sum(n // 10)`.'
+  reference: "\"\"\"Задача 3. Сумма цифр числа через рекурсию.\"\"\"\ndef digit_sum(n):\n    if n < 10:\n        return n\n    return n % 10 + digit_sum(n // 10)\n\nprint(digit_sum(8472301))\n"
+  check:
+    kind: stdout
+    expected_stdout: '25
+
+      '
+- id: 12_recursion-04
+  topic_id: 12_recursion
+  index: 4
+  title: Возведение в степень
+  statement: '### Задача 4. Возведение в степень
+
+
+    `power(a, n) = a · power(a, n-1)`, `power(a, 0) = 1`. Реализуй.'
+  reference: "\"\"\"Задача 4. Возведение в степень через рекурсию.\"\"\"\ndef power(a, n):\n    if n == 0:\n        return 1\n    return a * power(a, n - 1)\n\nprint(power(2, 10))\nprint(power(3, 5))\n"
+  check:
+    kind: stdout
+    expected_stdout: '1024
+
+      243
+
+      '
+- id: 12_recursion-05
+  topic_id: 12_recursion
+  index: 5
+  title: Развернуть строку
+  statement: '### Задача 5. Развернуть строку
+
+
+    `reverse(s)` — рекурсивно. Базовый случай: длина 0 или 1 — вернуть как есть. Шаг: `reverse(s[1:]) + s[0]`.'
+  reference: "\"\"\"Задача 5. Развернуть строку через рекурсию.\"\"\"\ndef reverse(s):\n    if len(s) <= 1:\n        return s\n    return reverse(s[1:]) + s[0]\n\nprint(reverse(\"Hello\"))\nprint(reverse(\"Python\"))\n"
+  check:
+    kind: stdout
+    expected_stdout: 'olleH
+
+      nohtyP
+
+      '
+- id: 12_recursion-06
+  topic_id: 12_recursion
+  index: 6
+  title: Сумма списка
+  statement: '### Задача 6. Сумма списка
+
+
+    Реализуй `list_sum(lst)` рекурсивно, **без `sum`**. Базовый случай — пустой список.'
+  reference: "\"\"\"Задача 6. Сумма списка через рекурсию (без sum).\"\"\"\ndef list_sum(lst):\n    if not lst:\n        return 0\n    return lst[0] + list_sum(lst[1:])\n\nprint(list_sum([1, 2, 3, 4, 5]))\nprint(list_sum([]))\n"
+  check:
+    kind: stdout
+    expected_stdout: '15
+
+      0
+
+      '
+- id: 12_recursion-07
+  topic_id: 12_recursion
+  index: 7
+  title: Длина списка
+  statement: '### Задача 7. Длина списка
+
+
+    Реализуй `length(lst)` рекурсивно, **без `len`**.'
+  reference: "\"\"\"Задача 7. Длина списка БЕЗ len().\"\"\"\ndef length(lst):\n    if not lst:\n        return 0\n    return 1 + length(lst[1:])\n\nprint(length([10, 20, 30, 40, 50, 60]))\n"
+  check:
+    kind: stdout
+    expected_stdout: '6
+
+      '
+- id: 12_recursion-08
+  topic_id: 12_recursion
+  index: 8
+  title: НОД (алгоритм Евклида)
+  statement: '### Задача 8. НОД (алгоритм Евклида)
+
+
+    `gcd(a, b)` — наибольший общий делитель. Если `b == 0`, то `gcd = a`. Иначе `gcd(b, a % b)`.
+
+
+    Проверь на парах: (48, 18), (100, 75), (7, 13).'
+  reference: "\"\"\"Задача 8. НОД двух чисел (алгоритм Евклида).\"\"\"\ndef gcd(a, b):\n    if b == 0:\n        return a\n    return gcd(b, a % b)\n\nprint(gcd(48, 18))\nprint(gcd(100, 75))\nprint(gcd(7, 13))\n"
+  check:
+    kind: stdout
+    expected_stdout: '6
+
+      25
+
+      1
+
+      '
+- id: 12_recursion-09
+  topic_id: 12_recursion
+  index: 9
+  title: Ханойские башни
+  statement: '### Задача 9. Ханойские башни
+
+
+    Сколько минимум ходов нужно, чтобы переместить пирамиду из `n` колец? Формула: `T(n) = 2·T(n-1) + 1`, `T(0) = 0`. Выведи для `n` от 1 до 8.'
+  reference: "\"\"\"Задача 9. Ханойские башни — сколько ходов нужно?\"\"\"\ndef hanoi_moves(n):\n    if n == 0:\n        return 0\n    return 2 * hanoi_moves(n - 1) + 1\n\nfor n in range(1, 9):\n    print(f\"n={n}: {hanoi_moves(n)} ходов\")\n"
+  check:
+    kind: stdout
+    expected_stdout: 'n=1: 1 ходов
+
+      n=2: 3 ходов
+
+      n=3: 7 ходов
+
+      n=4: 15 ходов
+
+      n=5: 31 ходов
+
+      n=6: 63 ходов
+
+      n=7: 127 ходов
+
+      n=8: 255 ходов
+
+      '
+- id: 12_recursion-10
+  topic_id: 12_recursion
+  index: 10
+  title: flatten
+  statement: '### Задача 10. flatten
+
+
+    Дан вложенный список произвольной глубины, например `[1, [2, 3, [4, [5, 6]], 7], 8, [9, [10]]]`. Получи плоский список: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`.
+
+
+    *Подсказка:* `isinstance(item, list)` проверяет, является ли элемент списком.'
+  reference: "\"\"\"Задача 10. flatten — превратить вложенный список в плоский.\"\"\"\ndef flatten(lst):\n    result = []\n    for item in lst:\n        if isinstance(item, list):\n            result.extend(flatten(item))   # рекурсивно обрабатываем подсписок\n        else:\n            result.append(item)\n    return result\n\nnested = [1, [2, 3, [4, [5, 6]], 7], 8, [9, [10]]]\nprint(flatten(nested))\n"
+  check:
+    kind: stdout
+    expected_stdout: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+      '

@@ -1,0 +1,313 @@
+topic_id: 02_variables
+tasks:
+- id: 02_variables-01
+  topic_id: 02_variables
+  index: 1
+  title: Визитка через переменные
+  statement: '### Задача 1. Визитка через переменные
+
+
+    Объяви три переменные: `name` (строка), `age` (целое число), `height` (число с точкой — рост в метрах). Выведи их одной командой через пробел.'
+  reference: '"""Задача 1. Объявить переменные имени, возраста, роста (в метрах) и вывести их."""
+
+    name = "Алиса"
+
+    age = 25
+
+    height = 1.68
+
+    print(name, age, height)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Алиса 25 1.68
+
+      '
+- id: 02_variables-02
+  topic_id: 02_variables
+  index: 2
+  title: Площадь прямоугольника
+  statement: '### Задача 2. Площадь прямоугольника
+
+
+    Объяви две переменные `a` и `b` (стороны прямоугольника). Вычисли площадь и выведи её через f-строку: `Площадь = ...`.'
+  reference: '"""Задача 2. Площадь прямоугольника со сторонами a и b."""
+
+    a = 7
+
+    b = 4
+
+    area = a * b
+
+    print(f"Площадь = {area}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Площадь = 28
+
+      '
+- id: 02_variables-03
+  topic_id: 02_variables
+  index: 3
+  title: Из Цельсия в Фаренгейты
+  statement: '### Задача 3. Из Цельсия в Фаренгейты
+
+
+    Дана температура в Цельсиях в переменной `celsius`. По формуле `F = C * 9/5 + 32` вычисли температуру в Фаренгейтах. Выведи результат.'
+  reference: '"""Задача 3. Перевести градусы Цельсия в Фаренгейты по формуле F = C * 9/5 + 32."""
+
+    celsius = 25
+
+    fahrenheit = celsius * 9 / 5 + 32
+
+    print(f"{celsius}°C = {fahrenheit}°F")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '25°C = 77.0°F
+
+      '
+- id: 02_variables-04
+  topic_id: 02_variables
+  index: 4
+  title: Поменять местами
+  statement: '### Задача 4. Поменять местами
+
+
+    Объяви `a = 10` и `b = 20`. Поменяй их значения местами — после твоего кода `a` должно стать 20, а `b` — 10. Выведи «До» и «После».
+
+
+    *Подсказка:* в Python это делается одной строкой через распаковку.'
+  reference: '"""Задача 4. Поменять местами значения двух переменных."""
+
+    a = 10
+
+    b = 20
+
+    print("До:", a, b)
+
+    a, b = b, a   # Pythonic swap через распаковку кортежа
+
+    print("После:", a, b)
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'До: 10 20
+
+      После: 20 10
+
+      '
+- id: 02_variables-05
+  topic_id: 02_variables
+  index: 5
+  title: Преобразование типов
+  statement: '### Задача 5. Преобразование типов
+
+
+    Дано:
+
+
+    ```python
+
+    s = "42"
+
+    x = 100
+
+    ```
+
+
+    1. Преврати `s` в целое число и прибавь к нему 8 (должно получиться 50).
+
+    2. Преврати `x` во float (должно получиться 100.0).
+
+
+    Выведи оба результата.'
+  reference: '"""Задача 5. Дана строка ''42''. Получить из неё целое число и прибавить 8.
+
+    Дано целое число 100 — превратить во float."""
+
+    s = "42"
+
+    n = int(s) + 8
+
+    print(n)              # 50
+
+
+    x = 100
+
+    y = float(x)
+
+    print(y)              # 100.0
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '50
+
+      100.0
+
+      '
+- id: 02_variables-06
+  topic_id: 02_variables
+  index: 6
+  title: Какой у меня тип?
+  statement: '### Задача 6. Какой у меня тип?
+
+
+    Объяви переменные шести разных типов: `int`, `float`, `str`, `bool`, `None`, `list`. С помощью функции `type()` выведи их типы.'
+  reference: '"""Задача 6. Создать переменные разных типов и вывести их типы через type()."""
+
+    a = 10
+
+    b = 3.14
+
+    c = "hello"
+
+    d = True
+
+    e = None
+
+    f = [1, 2, 3]
+
+
+    print(type(a))
+
+    print(type(b))
+
+    print(type(c))
+
+    print(type(d))
+
+    print(type(e))
+
+    print(type(f))
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: '<class ''int''>
+
+      <class ''float''>
+
+      <class ''str''>
+
+      <class ''bool''>
+
+      <class ''NoneType''>
+
+      <class ''list''>
+
+      '
+- id: 02_variables-07
+  topic_id: 02_variables
+  index: 7
+  title: Секунды в днях
+  statement: '### Задача 7. Секунды в днях
+
+
+    Сколько секунд в `N` днях? Объяви переменную `days = 7`, посчитай секунды и выведи: `В 7 днях ... секунд`.'
+  reference: '"""Задача 7. Сколько секунд в N днях?"""
+
+    days = 7
+
+    seconds = days * 24 * 60 * 60
+
+    print(f"В {days} днях {seconds} секунд")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'В 7 днях 604800 секунд
+
+      '
+- id: 02_variables-08
+  topic_id: 02_variables
+  index: 8
+  title: Стоимость поездки
+  statement: '### Задача 8. Стоимость поездки
+
+
+    Даны три переменные:
+
+    - `km` — расстояние в километрах,
+
+    - `consumption_per_100` — расход топлива в литрах на 100 км,
+
+    - `price_per_liter` — цена литра.
+
+
+    Подсчитай и выведи стоимость поездки.'
+  reference: '"""Задача 8. Расход топлива.
+
+    Дано: путь km, расход л/100км, цена литра.
+
+    Вывести стоимость поездки."""
+
+    km = 350
+
+    consumption_per_100 = 7.5
+
+    price_per_liter = 55.0
+
+    cost = km / 100 * consumption_per_100 * price_per_liter
+
+    print(f"Поездка на {km} км обойдётся в {cost} руб")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Поездка на 350 км обойдётся в 1443.75 руб
+
+      '
+- id: 02_variables-09
+  topic_id: 02_variables
+  index: 9
+  title: Среднее арифметическое
+  statement: '### Задача 9. Среднее арифметическое
+
+
+    Даны три числа `a`, `b`, `c`. Найди их среднее арифметическое.'
+  reference: '"""Задача 9. Среднее арифметическое трёх чисел."""
+
+    a, b, c = 4, 7, 10
+
+    avg = (a + b + c) / 3
+
+    print(f"Среднее = {avg}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'Среднее = 7.0
+
+      '
+- id: 02_variables-10
+  topic_id: 02_variables
+  index: 10
+  title: Индекс массы тела (BMI)
+  statement: '### Задача 10. Индекс массы тела (BMI)
+
+
+    `BMI = вес / рост²`. Дано: `weight_kg = 68`, `height_m = 1.72`. Посчитай BMI и выведи **с двумя знаками после запятой** (используй f-строку с `:.2f`).'
+  reference: '"""Задача 10. Индекс массы тела (BMI = вес / рост²).
+
+    Округлить до двух знаков после запятой."""
+
+    weight_kg = 68
+
+    height_m = 1.72
+
+    bmi = weight_kg / height_m ** 2
+
+    print(f"BMI = {bmi:.2f}")
+
+    '
+  check:
+    kind: stdout
+    expected_stdout: 'BMI = 22.99
+
+      '
