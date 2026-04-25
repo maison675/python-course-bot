@@ -1,10 +1,10 @@
 """Клавиатуры и форматирование сообщений."""
 from __future__ import annotations
 
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from bot.content import Task, Topic, load_tasks, load_topics
+from bot.content import Task, Topic, Track, load_tasks, load_topics, load_tracks
 
 TG_MAX = 4000  # с запасом до лимита 4096
 
@@ -18,13 +18,29 @@ def main_menu() -> InlineKeyboardMarkup:
     return b.as_markup()
 
 
-def topics_menu(solved_per_topic: dict[str, int]) -> InlineKeyboardMarkup:
+def tracks_menu(solved_per_track: dict[str, tuple[int, int]]) -> InlineKeyboardMarkup:
+    """solved_per_track: {track_id: (solved, total)}"""
     b = InlineKeyboardBuilder()
-    for t in load_topics():
-        solved = solved_per_topic.get(t.id, 0)
-        suffix = f" ({solved}/10)" if solved else ""
-        b.button(text=f"{t.emoji} {t.title}{suffix}", callback_data=f"t:{t.id}")
+    for track in load_tracks():
+        s, t = solved_per_track.get(track.id, (0, 0))
+        suffix = f" ({s}/{t})" if t else ""
+        b.button(text=f"{track.title}{suffix}", callback_data=f"tr:{track.id}")
     b.button(text="« В меню", callback_data="main")
+    b.adjust(1)
+    return b.as_markup()
+
+
+def topics_menu(track: Track, solved_per_topic: dict[str, int]) -> InlineKeyboardMarkup:
+    b = InlineKeyboardBuilder()
+    for t in load_topics(track.id):
+        n_tasks = len(load_tasks(t.id))
+        solved = solved_per_topic.get(t.id, 0)
+        if n_tasks:
+            suffix = f" ({solved}/{n_tasks})"
+        else:
+            suffix = " (теория)"
+        b.button(text=f"{t.emoji} {t.title}{suffix}", callback_data=f"t:{t.id}")
+    b.button(text="« К трекам", callback_data="topics")
     b.adjust(1)
     return b.as_markup()
 
@@ -32,12 +48,13 @@ def topics_menu(solved_per_topic: dict[str, int]) -> InlineKeyboardMarkup:
 def topic_menu(topic: Topic, solved: set[str]) -> InlineKeyboardMarkup:
     b = InlineKeyboardBuilder()
     b.button(text="📖 Теория", callback_data=f"y:{topic.id}")
-    n_solved = len(solved)
-    b.button(
-        text=f"🎯 Полигон ({n_solved}/10 решено)",
-        callback_data=f"p:{topic.id}",
-    )
-    b.button(text="« К темам", callback_data="topics")
+    n_tasks = len(load_tasks(topic.id))
+    if n_tasks:
+        b.button(
+            text=f"🎯 Полигон ({len(solved)}/{n_tasks} решено)",
+            callback_data=f"p:{topic.id}",
+        )
+    b.button(text="« К темам", callback_data=f"tr:{topic.track_id}")
     b.adjust(1)
     return b.as_markup()
 
@@ -76,7 +93,6 @@ def chunk_text(text: str, limit: int = TG_MAX) -> list[str]:
             if cur:
                 parts.append(cur.rstrip())
                 cur = ""
-            # параграф сам слишком большой?
             while len(paragraph) > limit:
                 parts.append(paragraph[:limit])
                 paragraph = paragraph[limit:]
